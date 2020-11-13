@@ -1,5 +1,5 @@
 import json
-from . import connfig
+import config
 from requests_oauthlib import OAuth1Session
 
 def my_timeline():
