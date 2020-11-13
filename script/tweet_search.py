@@ -2,7 +2,7 @@ import json
 import config
 from requests_oauthlib import OAuth1Session
 
-def main():
+def main(from_date, to_date,res = None):
     url = "https://api.twitter.com/1.1/tweets/search/fullarchive/MyPortfolio.json"
     keyword = ""
     print('----------------------------------------------------')
@@ -45,4 +45,4 @@ if __name__ == '__main__':
     AT = config.ACCESS_TOKEN
     ATS = config.ACCESS_TOKEN_SECRET
     twitter = OAuth1Session(CK, CS, AT, ATS)
-    main()
+    main("201906010000", "201907010000")
