@@ -2,4 +2,4 @@ bin/
 include/
 lib/
 pyvenv.cfg
-config.py
+script/config.py
