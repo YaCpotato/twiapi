@@ -1,7 +1,6 @@
 import json
 import config
 from requests_oauthlib import OAuth1Session
-import pathlib
 import csv
 
 def main(from_date, to_date,res = None):
@@ -13,10 +12,11 @@ def main(from_date, to_date,res = None):
     #CSVのヘッダーを定義
     header = ['id','User Name','User ID','Follows','Followers','User Location','content','time']
     search_timeline = {}
-    
+
     with open('../data/{keyword}from{from_date}_to{to_date}.csv'.format(keyword = keyword, from_date = from_date, to_date = to_date), 'w') as f:
         search_timeline = json.loads(result.text)
-        csv.writer(f).writerow(header)
+        writer = csv.writer(f)
+        writer.writerow(header)
         for tweet in search_timeline['results']:
             tmp = []
             tmp.append(tweet['id'])
