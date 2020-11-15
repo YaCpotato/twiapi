@@ -13,7 +13,7 @@ def main(from_date, to_date,res = None):
     header = ['id','User Name','User ID','Follows','Followers','User Location','content','time']
     search_timeline = {}
 
-    with open('../data/{keyword}from{from_date}_to{to_date}.csv'.format(keyword = keyword, from_date = from_date, to_date = to_date), 'w') as f:
+    with open(r"../data/{keyword}from{from_date}_to{to_date}.csv",keyword = keyword, from_date = from_date, to_date = to_date 'w') as f:
         search_timeline = json.loads(result.text)
         writer = csv.writer(f)
         writer.writerow(header)
