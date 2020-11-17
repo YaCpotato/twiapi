@@ -4,7 +4,7 @@ from requests_oauthlib import OAuth1Session
 
 def my_timeline():
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
-    params ={'count' : 20}
+    params ={'screen_name': 'realDonaldTrump','count' : 20}# JoeBiden
     req = twitter.get(url, params = params)
     if req.status_code == 200:
         timeline = json.loads(req.text)
