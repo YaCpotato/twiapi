@@ -7,7 +7,7 @@ def main(from_date, to_date,res = None):
     url = "https://api.twitter.com/1.1/tweets/search/fullarchive/MyPortfolio.json"
     keyword = "コロナ"
     print('----------------------------------------------------')
-    params = {'query' : keyword, 'maxResults' : 100,'fromDate':from_date,'toDate':to_date}
+    params = {'query' : keyword, 'maxResults' : 1,'fromDate':from_date,'toDate':to_date}
 
     #CSVのヘッダーを定義
     header = ['id','User Name','User ID','Follows','Followers','User Location','content','time']
@@ -16,7 +16,8 @@ def main(from_date, to_date,res = None):
     #リクエスト
     result = twitter.get(url, params = params)
 
-    with open("sample.csv",'w') as f:
+    
+    with open("daily.csv",'a') as f:
         search_timeline = json.loads(result.text)
         writer = csv.writer(f)
         writer.writerow(header)
@@ -32,7 +33,7 @@ def main(from_date, to_date,res = None):
             tmp.append(tweet['created_at'])
             writer.writerow(tmp)
             tmp = []
-        print(len(search_timeline['results']))
+    
 
 if __name__ == '__main__':
     CK = config.CONSUMER_KEY
