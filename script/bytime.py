@@ -3,11 +3,14 @@ import config
 from requests_oauthlib import OAuth1Session
 import csv
 
-def main(from_date, to_date,res = None):
+import time
+import schedule
+from datetime import datetime
+
+def main(from_date="201906010000", to_date="201907010000",res = None):
     url = "https://api.twitter.com/1.1/tweets/search/fullarchive/MyPortfolio.json"
     keyword = "コロナ"
-    print('----------------------------------------------------')
-    params = {'query' : keyword, 'maxResults' : 1,'fromDate':from_date,'toDate':to_date}
+    params = {'query' : keyword, 'maxResults' : 100,'fromDate':from_date,'toDate':to_date}
 
     #CSVのヘッダーを定義
     header = ['id','User Name','User ID','Follows','Followers','User Location','content','time']
@@ -16,7 +19,6 @@ def main(from_date, to_date,res = None):
     #リクエスト
     result = twitter.get(url, params = params)
 
-    
     with open("daily.csv",'a') as f:
         search_timeline = json.loads(result.text)
         writer = csv.writer(f)
@@ -41,4 +43,9 @@ if __name__ == '__main__':
     AT = config.ACCESS_TOKEN
     ATS = config.ACCESS_TOKEN_SECRET
     twitter = OAuth1Session(CK, CS, AT, ATS)
-    main("201906010000", "201907010000")
+
+    schedule.every().day.at("00:08").do(main)
+  
+    while True:
+        schedule.run_pending()
+        time.sleep(60)
