@@ -10,7 +10,7 @@ def my_timeline():
     header = ['id','User Name','User ID','Follows','Followers','User Location','content','time']
     req = twitter.get(url, params = params)
     if req.status_code == 200:
-        with open('my_timeline.csv', 'w') as f:
+        with open('susumu_timeline_2.csv', 'w') as f:
             writer = csv.writer(f)
             writer.writerow(header)
             timeline = json.loads(req.text)
