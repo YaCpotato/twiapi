@@ -1,7 +1,8 @@
 import json
 import config
-from requests_oauthlib import OAuth1Session
 import csv
+from requests_oauthlib import OAuth1Session
+from datetime import datetime
 
 def my_timeline():
     url = "https://api.twitter.com/1.1/statuses/user_timeline.json"
@@ -22,7 +23,8 @@ def my_timeline():
                 tmp.append(tweet['user']['followers_count'])
                 tmp.append(tweet['user']['location'])
                 tmp.append(tweet['text'])
-                tmp.append(tweet['created_at'])
+                date = datetime.strptime(tweet['created_at'],'%a %b %d %H:%M:%S %z %Y')
+                tmp.append(f"{date.year}-{date.month}-{date.day} {date.hour}:{date.minute}:{date.second}")
                 writer.writerow(tmp)
     else:
         print("ERROR: %d" % req.status_code)
