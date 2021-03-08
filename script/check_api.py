@@ -5,7 +5,7 @@ import csv
 
 def main(from_date, to_date,res = None):
     url = "https://api.twitter.com/1.1/tweets/search/fullarchive/MyPortfolio.json"
-    keyword = "コロナ"
+    keyword = "ワクチン"
     print('----------------------------------------------------')
     params = {'query' : keyword, 'maxResults' : 100,'fromDate':from_date,'toDate':to_date}
 
